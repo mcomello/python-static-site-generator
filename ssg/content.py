@@ -4,7 +4,10 @@ from collections.abc import Mapping
 
 
 class Content(Mapping):
-    __delimiter = "^(?:-|+){3}\s*$"
+    # __delimiter = r"^(?:-|+){3}\s*$"
+    # __regex = re.compile(__delimiter, re.MULTILINE)
+
+    __delimiter = r"^(?:-|\+){3}\s*$"
     __regex = re.compile(__delimiter, re.MULTILINE)
 
     @classmethod
@@ -36,11 +39,11 @@ class Content(Mapping):
         return self.data.__iter__()
 
     def __len__(self):
-        return self.data.len()
+        return len(self.data)
 
     def __repr__(self):
         data = dict()
-        for key in self.data.items():
-            if key is not "content":
+        for key, value in self.data.items():
+            if key != "content":
                 data[key] = value
         return str(data)
