@@ -6,7 +6,7 @@ import ssg.parsers
 def main(source="content", dest="dist"):
     config = {
         "source": source,
-        "parsers": (ssg.parsers.ResourceParser()),
+        "parsers": [ssg.parsers.ResourceParser(), ssg.parsers.MarkdownParser(), ssg.parsers.ReStructuredTextParser()],
         "dest": dest,
     }
     Site(**config).build()
